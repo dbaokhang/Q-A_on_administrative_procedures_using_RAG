@@ -1,0 +1,649 @@
+{
+  "date": "2026-11-05",
+  "benchmark": "data\\benchmark\\vi_communeqa_sample.jsonl",
+  "mode": "full",
+  "pipeline": {
+    "pipeline_version": "2026.11-dacn-1",
+    "corpus_version": "d05a19ff6be9e638",
+    "embedding_model": "finetuned-e5",
+    "vector_backend": "qdrant",
+    "fusion": "rrf",
+    "reranker": true,
+    "llm": "ollama/llama3.1:8b",
+    "chunks": 4113
+  },
+  "n_cases": 23,
+  "retrieval": {
+    "recall@5": 0.9412,
+    "precision@3": 0.3922,
+    "mrr@10": 0.9706,
+    "ndcg@5": 0.9328
+  },
+  "retrieval_n": 17,
+  "intent_accuracy": 0.95,
+  "intent_n": 20,
+  "access_leaks": 0,
+  "latency_ms": {
+    "dense_ms": {
+      "mean": 419.4337,
+      "p50": 346.46840021014214,
+      "p95": 638.4797999635339
+    },
+    "fusion_ms": {
+      "mean": 1.3,
+      "p50": 1.1497000232338905,
+      "p95": 2.8732996433973312
+    },
+    "generate_ms": {
+      "mean": 9553.3305,
+      "p50": 5419.531099963933,
+      "p95": 22668.75119972974
+    },
+    "rerank_ms": {
+      "mean": 2204.2708,
+      "p50": 2022.1422999165952,
+      "p95": 3388.306099921465
+    },
+    "rewrite_ms": {
+      "mean": 67.8483,
+      "p50": 0.06859982386231422,
+      "p95": 0.21560024470090866
+    },
+    "sparse_ms": {
+      "mean": 30.8432,
+      "p50": 24.964199867099524,
+      "p95": 69.6323998272419
+    },
+    "total_ms": {
+      "mean": 9430.7001,
+      "p50": 7535.5727998539805,
+      "p95": 24830.08150011301
+    }
+  },
+  "cases": [
+    {
+      "id": "hs-khai-sinh",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "tra_cuu_ho_so",
+      "expected_intent": "tra_cuu_ho_so",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 1/3)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 1/3)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 2/3)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 2/3)"
+      ],
+      "total_ms": 48083.0,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.4545454545454545,
+        "rouge2": 0.3557692307692307,
+        "rougeL": 0.42583732057416274,
+        "bleu4": 0.20332242566122266
+      },
+      "answer": "Để đăng ký khai sinh, bạn cần chuẩn bị các giấy tờ sau:\n\n* Giấy tờ phải xuất trình:\n + Hộ chiếu hoặc chứng minh nhân dân hoặc thẻ căn cước công dân hoặc các giấy tờ khác có dán ảnh và thông tin cá nhân do cơ quan có thẩm quyền cấp, còn giá trị sử dụng để chứng minh về nhân thân của người có yêu cầu đăng ký khai sinh.\n + Giấy tờ chứng minh nơi cư trú để chứng minh thẩm quyền đăng ký khai sinh; trường hợp cha, mẹ của trẻ đã đăng ký kết hôn thì phải xuất trình Giấy chứng nhận kết hôn (trong giai đoạn chuyển tiếp).\n* Giấy tờ phải nộp:\n + Tờ khai đăng ký khai sinh theo mẫu.\n + Bản chính Giấy chứng sinh; trường hợp không có Giấy chứng sinh thì nộp văn bản của người làm chứng xác nhận về việc sinh; nếu không có người làm chứng thì phải có giấy cam đoan về việc sinh.\n + Trường hợp khai sinh cho trẻ em sinh ra do mang thai hộ phải có văn bản xác nhận của cơ sở y tế đã thực hiện kỹ thuật hỗ trợ sinh sản cho việc mang thai hộ.\n + Văn bản ủy quyền (được chứng thực) theo quy định của pháp luật trong trường hợp ủy quyền thực hiện việc đăng ký khai sinh.\n\nLưu ý: Đối với giấy tờ nộp, xuất trình, nếu người yêu cầu nộp giấy tờ là bản sao được cấp từ sổ gốc hoặc bản sao được chứng thực từ bản chính thì người tiếp nhận hồ sơ không được yêu cầu xuất trình bản chính; nếu người yêu cầu chỉ nộp bản chụp và xuất trình bản chính thì người tiếp nhận hồ sơ kiểm tra, đối chiếu bản chụp với bản chính và ký vào bản chụp xác nhận về việc đã đối chiếu nội dung giấy tờ đó.\n\nMã nguồn: [S1]"
+    },
+    {
+      "id": "th-ket-hon",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_thoi_gian",
+      "expected_intent": "hoi_thoi_gian",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn"
+      ],
+      "total_ms": 9585.6,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.9180327868852458,
+        "rouge2": 0.9166666666666666,
+        "rougeL": 0.9180327868852458,
+        "bleu4": 0.8449103546728991
+      },
+      "answer": "Thời hạn giải quyết đăng ký kết hôn là ngay trong ngày tiếp nhận hồ sơ, trường hợp nhận hồ sơ sau 15 giờ mà không giải quyết được ngay thì trả kết quả trong ngày làm việc tiếp theo. Trường hợp cần xác minh điều kiện kết hôn của hai bên nam, nữ thì thời hạn giải quyết không quá 05 ngày làm việc. [S1]"
+    },
+    {
+      "id": "lp-ket-hon",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "tra_cuu_le_phi",
+      "expected_intent": "tra_cuu_le_phi",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn"
+      ],
+      "total_ms": 4046.5,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.8421052631578948,
+        "rouge2": 0.8235294117647058,
+        "rougeL": 0.8421052631578948,
+        "bleu4": 0.6786502681586726
+      },
+      "answer": "Theo [S1], việc đăng ký kết hôn được miễn lệ phí."
+    },
+    {
+      "id": "dk-ket-hon",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_dieu_kien",
+      "expected_intent": "hoi_dieu_kien",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)"
+      ],
+      "total_ms": 24830.1,
+      "retrieval": {
+        "recall@5": 0.5,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 0.6131471927654584
+      },
+      "generation": {
+        "rouge1": 0.5454545454545454,
+        "rouge2": 0.48854961832061067,
+        "rougeL": 0.5303030303030303,
+        "bleu4": 0.3146155073839781
+      },
+      "answer": "Để đăng ký kết hôn, các bên nam và nữ phải đáp ứng đủ các điều kiện sau:\n\n- Nam từ đủ 20 tuổi trở lên, nữ từ đủ 18 tuổi trở lên;\n- Việc kết hôn do nam và nữ tự nguyện quyết định;\n- Không bị mất năng lực hành vi dân sự;\n- Việc kết hôn không thuộc một trong các trường hợp cấm kết hôn, gồm:\n+ Kết hôn giả tạo;\n+ Tảo hôn, cưỡng ép kết hôn, lừa dối kết hôn, cản trở kết hôn;\n+ Người đang có vợ, có chồng mà kết hôn với người khác hoặc chưa có vợ, chưa có chồng mà kết hôn với người đang có chồng, có vợ;\n+ Kết hôn giữa những người cùng dòng máu về trực hệ; giữa những người có họ trong phạm vi ba đời; giữa cha, mẹ nuôi với con nuôi; giữa người đã từng là cha, mẹ nuôi với con nuôi, cha chồng với con dâu, mẹ vợ với con rể, cha dượng với con riêng của vợ, mẹ kế với con riêng của chồng;\n* Nhà nước không thừa nhận hôn nhân giữa những người cùng giới tính.\n\n[S1][S2][S3]"
+    },
+    {
+      "id": "cq-khai-tu",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_trinh_tu",
+      "expected_intent": "hoi_trinh_tu",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/3)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 2/2)"
+      ],
+      "total_ms": 9520.2,
+      "retrieval": {
+        "recall@5": 0.5,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 0.6131471927654584
+      },
+      "generation": {
+        "rouge1": 0.3013698630136986,
+        "rouge2": 0.22535211267605634,
+        "rougeL": 0.3013698630136986,
+        "bleu4": 0.08863147883100878
+      },
+      "answer": "Người có yêu cầu đăng ký khai tử nộp hồ sơ tại Ủy ban nhân dân cấp xã có thẩm quyền [S1]."
+    },
+    {
+      "id": "th-xac-nhan-hon-nhan",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_thoi_gian",
+      "expected_intent": "hoi_thoi_gian",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/3)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Căn cứ pháp lý (phần 5/5)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ (phần 1/3)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn"
+      ],
+      "total_ms": 8692.1,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.8571428571428571,
+        "rouge2": 0.85,
+        "rougeL": 0.8571428571428571,
+        "bleu4": 0.7325510644096216
+      },
+      "answer": "Thời hạn giải quyết là 03 ngày làm việc; trường hợp phải xác minh thì thời hạn giải quyết không quá 23 ngày. [S1]"
+    },
+    {
+      "id": "dk-dang-ky-lai-khai-sinh",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_dieu_kien",
+      "expected_intent": "hoi_dieu_kien",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 4/4)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/4)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/4)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/3)"
+      ],
+      "total_ms": 10236.6,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.8039215686274508,
+        "rouge2": 0.7200000000000001,
+        "rougeL": 0.7647058823529412,
+        "bleu4": 0.6438639356986641
+      },
+      "answer": "Theo [S1], việc đăng ký lại khai sinh được thực hiện khi giấy khai sinh đã được đăng ký tại cơ quan có thẩm quyền của Việt Nam trước ngày 01/01/2016 nhưng Sổ đăng ký khai sinh và bản chính Giấy khai sinh đều bị mất."
+    },
+    {
+      "id": "lp-chung-thuc-ban-sao",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "tra_cuu_le_phi",
+      "expected_intent": "tra_cuu_le_phi",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Căn cứ pháp lý",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Căn cứ pháp lý",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thông tin chung"
+      ],
+      "total_ms": 12619.7,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 0.5,
+        "ndcg@5": 0.6309297535714575
+      },
+      "generation": {
+        "rouge1": 0.8571428571428571,
+        "rouge2": 0.8543689320388349,
+        "rougeL": 0.8571428571428571,
+        "bleu4": 0.7434798561598047
+      },
+      "answer": "Theo quy định tại [S2], lệ phí chứng thực bản sao từ bản chính là 2.000 đồng/trang đối với trang thứ nhất, trang thứ hai; từ trang thứ ba trở lên thu 1.000 đồng/trang nhưng mức thu tối đa không quá 200.000 đồng/bản. Trang là căn cứ để thu phí được tính theo trang của bản chính."
+    },
+    {
+      "id": "lp-chung-thuc-di-chuc",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "tra_cuu_le_phi",
+      "expected_intent": "tra_cuu_le_phi",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ",
+        "Bộ luật Dân sự 2015 (số 91/2015/QH13) | Điều 624",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thông tin chung"
+      ],
+      "total_ms": 6009.0,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.4210526315789474,
+        "rouge2": 0.35294117647058826,
+        "rougeL": 0.4210526315789474,
+        "bleu4": 0.16451929399933107
+      },
+      "answer": "Theo quy định tại [S1], phí chứng thực di chúc là 50.000 đồng/di chúc."
+    },
+    {
+      "id": "hs-chung-thuc-di-chuc",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "tra_cuu_ho_so",
+      "expected_intent": "tra_cuu_ho_so",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thành phần, số lượng hồ sơ",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ luật Dân sự 2015 (số 91/2015/QH13) | Điều 628"
+      ],
+      "total_ms": 18970.9,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.6769230769230768,
+        "rouge2": 0.5906735751295338,
+        "rougeL": 0.6461538461538462,
+        "bleu4": 0.44276028406711676
+      },
+      "answer": "Hồ sơ chứng thực di chúc gồm:\n\n- Dự thảo di chúc;\n- Bản sao Giấy chứng minh nhân dân/Căn cước công dân hoặc Hộ chiếu còn\ngiá trị sử dụng của người yêu cầu chứng thực (xuất trình kèm theo bản chính để đối\nchiếu);\n- Bản sao giấy chứng nhận quyền sở hữu, quyền sử dụng hoặc bản sao giấy tờ\nthay thế được pháp luật quy định đối với tài sản mà pháp luật quy định phải đăng ký\nquyền sở hữu, quyền sử dụng trong trường hợp di chúc liên quan đến tài sản đó; trừ\ntrường hợp người lập di chúc đang bị cái chết đe dọa đến tính mạng (xuất trình kèm\ntheo bản chính để đối chiếu).\n\n[S1][S3]"
+    },
+    {
+      "id": "th-cai-chinh",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_thoi_gian",
+      "expected_intent": "hoi_thoi_gian",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thông tin chung",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Luật Doanh nghiệp 2020 (số 59/2020/QH14) | Điều 176",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn"
+      ],
+      "total_ms": 14282.0,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.5769230769230769,
+        "rouge2": 0.5686274509803921,
+        "rougeL": 0.5769230769230769,
+        "bleu4": 0.3928474204433534
+      },
+      "answer": "Thời hạn giải quyết: - 03 ngày làm việc đối với yêu cầu thay đổi, cải chính hộ tịch; trường hợp phải xác\nminh thì thời hạn giải quyết không quá 06 ngày làm việc.\n- Ngay trong ngày làm việc đối với yêu cầu bổ sung thông tin hộ tịch, trường hợp\nnhận hồ sơ sau 15 giờ mà không giải quyết được ngay thì trả kết quả trong ngày làm việc\ntiếp theo. [S1]"
+    },
+    {
+      "id": "lp-nuoi-con-nuoi",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "tra_cuu_le_phi",
+      "expected_intent": "tra_cuu_le_phi",
+      "retrieved": [
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Căn cứ pháp lý (phần 1/7)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Căn cứ pháp lý (phần 1/4)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện (phần 2/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thông tin chung"
+      ],
+      "total_ms": 7053.4,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.2647058823529412,
+        "rouge2": 0.15151515151515152,
+        "rougeL": 0.17647058823529413,
+        "bleu4": 0.018176571393368327
+      },
+      "answer": "Lệ phí đăng ký nuôi con nuôi trong nước là 400.000 đồng/trường hợp [S1]."
+    },
+    {
+      "id": "luat-nghi-hang-nam",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "hoi_thoi_gian",
+      "expected_intent": "khac",
+      "retrieved": [
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 113",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 114",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 110",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 98",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Thời hạn giải quyết, phí, lệ phí, mẫu đơn"
+      ],
+      "total_ms": 5309.7,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.7017543859649122,
+        "rouge2": 0.5818181818181818,
+        "rougeL": 0.6315789473684211,
+        "bleu4": 0.5661558984408026
+      },
+      "answer": "Người lao động làm công việc trong điều kiện bình thường được nghỉ hằng năm 12 ngày làm việc, hưởng nguyên lương theo hợp đồng lao động [S1]."
+    },
+    {
+      "id": "luat-tuoi-ket-hon",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [
+        "Luật Hôn nhân và Gia đình 2014 (số 52/20 | Điều 8",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Yêu cầu, điều kiện",
+        "Luật Hôn nhân và Gia đình 2014 (số 52/20 | Điều 3",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 137",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)"
+      ],
+      "total_ms": 7535.6,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.6666666666666666,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.6511627906976745,
+        "rouge2": 0.6341463414634146,
+        "rougeL": 0.6511627906976745,
+        "bleu4": 0.38898853891443597
+      },
+      "answer": "Nam từ đủ 20 tuổi trở lên, nữ từ đủ 18 tuổi trở lên. [S1]"
+    },
+    {
+      "id": "luat-den-do-xe-may",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [
+        "Nghị định 168/2024/NĐ-CP (xử phạt giao t | Điều 7",
+        "Nghị định 168/2024/NĐ-CP (xử phạt giao t | Điều 8",
+        "Nghị định 168/2024/NĐ-CP (xử phạt giao t | Điều 9",
+        "Nghị định 168/2024/NĐ-CP (xử phạt giao t | Điều 7",
+        "Nghị định 168/2024/NĐ-CP (xử phạt giao t | Điều 10",
+        "Nghị định 100/2019/NĐ-CP (xử phạt giao t | Điều 47",
+        "Nghị định 100/2019/NĐ-CP (xử phạt giao t | Điều 47"
+      ],
+      "total_ms": 9164.6,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.3333333333333333,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.3928571428571429,
+        "rouge2": 0.2222222222222222,
+        "rougeL": 0.3928571428571429,
+        "bleu4": 0.06967359506953363
+      },
+      "answer": "Đi xe máy vượt đèn đỏ bị phạt từ 4.000.000 đồng đến 6.000.000 đồng [S1]"
+    },
+    {
+      "id": "luat-en-annual-leave",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 113",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 114",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 113",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 110",
+        "Bộ luật Lao động 2019 (số 45/2019/QH14) | Điều 106",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 4/4)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 2/2)"
+      ],
+      "total_ms": 4609.9,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.6666666666666666,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.07142857142857142,
+        "rouge2": 0.0,
+        "rougeL": 0.07142857142857142,
+        "bleu4": 0.0014680625283676285
+      },
+      "answer": "12 ngày làm việc [S1]"
+    },
+    {
+      "id": "lr-lam-giay-xac-nhan",
+      "status": "needs_clarification",
+      "expected_status": "needs_clarification",
+      "intent": null,
+      "expected_intent": "hoi_trinh_tu",
+      "retrieved": [],
+      "total_ms": 0.1,
+      "answer": "Bạn muốn hỏi về thủ tục nào? Vui lòng cho biết tên thủ tục (hoặc chọn một gợi ý bên dưới) để mình tra cứu đúng thành phần hồ sơ, trình tự và lệ phí."
+    },
+    {
+      "id": "lr-chuan-bi-ho-so",
+      "status": "needs_clarification",
+      "expected_status": "needs_clarification",
+      "intent": null,
+      "expected_intent": "tra_cuu_ho_so",
+      "retrieved": [],
+      "total_ms": 0.0,
+      "answer": "Bạn muốn hỏi về thủ tục nào? Vui lòng cho biết tên thủ tục (hoặc chọn một gợi ý bên dưới) để mình tra cứu đúng thành phần hồ sơ, trình tự và lệ phí."
+    },
+    {
+      "id": "ngoai-pham-vi-gia-vang",
+      "status": "insufficient_evidence",
+      "expected_status": "insufficient_evidence",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [],
+      "total_ms": 1785.0,
+      "answer": "Kho tài liệu hiện có chưa cung cấp căn cứ đủ rõ cho câu hỏi này. Bạn có thể nêu rõ tên thủ tục hoặc văn bản cần tra cứu, hoặc kiểm tra tại Bộ phận Một cửa của Ủy ban nhân dân cấp xã và Cổng Dịch vụ công quốc gia (dichvucong.gov.vn)."
+    },
+    {
+      "id": "ngoai-pham-vi-nau-an",
+      "status": "insufficient_evidence",
+      "expected_status": "insufficient_evidence",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [],
+      "total_ms": 1657.7,
+      "answer": "Kho tài liệu hiện có chưa cung cấp căn cứ đủ rõ cho câu hỏi này. Bạn có thể nêu rõ tên thủ tục hoặc văn bản cần tra cứu, hoặc kiểm tra tại Bộ phận Một cửa của Ủy ban nhân dân cấp xã và Cổng Dịch vụ công quốc gia (dichvucong.gov.vn)."
+    },
+    {
+      "id": "quyen-yeu-cau-noi-bo",
+      "status": "access_denied",
+      "expected_status": "access_denied",
+      "intent": null,
+      "expected_intent": "khac",
+      "retrieved": [],
+      "total_ms": 0.3,
+      "answer": "Bạn không có quyền truy cập tài liệu nội bộ. Nếu bạn là cán bộ, vui lòng đăng nhập bằng tài khoản được cấp; nếu cần hỗ trợ, liên hệ quản trị viên."
+    },
+    {
+      "id": "quyen-ro-ri-cong-khai",
+      "status": "insufficient_evidence",
+      "expected_status": "insufficient_evidence",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [],
+      "total_ms": 1871.1,
+      "leaked": 0,
+      "answer": "Kho tài liệu hiện có chưa cung cấp căn cứ đủ rõ cho câu hỏi này. Bạn có thể nêu rõ tên thủ tục hoặc văn bản cần tra cứu, hoặc kiểm tra tại Bộ phận Một cửa của Ủy ban nhân dân cấp xã và Cổng Dịch vụ công quốc gia (dichvucong.gov.vn)."
+    },
+    {
+      "id": "quyen-can-bo-noi-bo",
+      "status": "answered_with_sources",
+      "expected_status": "answered_with_sources",
+      "intent": "khac",
+      "expected_intent": "khac",
+      "retrieved": [
+        "Hướng dẫn nội bộ tiếp nhận hồ sơ hộ tịch | 2. Khi trợ lý ảo trích dẫn nguồn có trạng thái \"Ch",
+        "Hướng dẫn nội bộ tiếp nhận hồ sơ hộ tịch | # TÀI LIỆU NỘI BỘ MẪU (GIẢ LẬP) — HƯỚNG DẪN TIẾP N",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện",
+        "Bộ TTHC thuộc thẩm quyền UBND cấp xã (TP | Mục: Trình tự, cách thức thực hiện (phần 1/2)"
+      ],
+      "total_ms": 11042.9,
+      "retrieval": {
+        "recall@5": 1.0,
+        "precision@3": 0.6666666666666666,
+        "mrr@10": 1.0,
+        "ndcg@5": 1.0
+      },
+      "generation": {
+        "rouge1": 0.7333333333333334,
+        "rouge2": 0.7241379310344828,
+        "rougeL": 0.7333333333333334,
+        "bleu4": 0.5610704892147494
+      },
+      "answer": "Khi trợ lý ảo trích dẫn nguồn có trạng thái \"Chưa xác minh hiệu lực\", cán bộ phải đối chiếu Cơ sở dữ liệu quốc gia về thủ tục hành chính trước khi hướng dẫn người dân. [S1]"
+    }
+  ],
+  "control": {
+    "status_accuracy": 1.0,
+    "citation_gold_rate": 1.0,
+    "key_facts_rate": 0.8824,
+    "answerable_n": 17
+  },
+  "generation": {
+    "rouge1": 0.5923,
+    "rouge2": 0.533,
+    "rougeL": 0.5763,
+    "bleu4": 0.4033
+  },
+  "generation_n": 17
+}

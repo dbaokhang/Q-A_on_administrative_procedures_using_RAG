@@ -1,0 +1,82 @@
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Provider sinh câu trả lời:
+#   gemini — Google AI Studio (cần GOOGLE_API_KEY hoặc GEMINI_API_KEY)
+#   ollama — mô hình chạy cục bộ (OLLAMA_BASE_URL)
+DEFAULT_MODELS = {
+    "gemini": "gemini-3.5-flash-lite",
+    "ollama": "qwen3:8b",
+}
+
+
+def _google_api_key() -> str:
+    return (os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or "").strip()
+
+
+def _resolve_provider() -> str:
+    provider = os.getenv("LLM_PROVIDER", "").strip().lower()
+    if not provider:
+        provider = "gemini" if _google_api_key() else "ollama"
+    if provider not in DEFAULT_MODELS:
+        raise ValueError(f"LLM_PROVIDER không hợp lệ: {provider!r} (chọn 'gemini' hoặc 'ollama')")
+    return provider
+
+
+LLM_PROVIDER = _resolve_provider()
+LLM_MODEL = os.getenv("LLM_MODEL", "").strip() or DEFAULT_MODELS[LLM_PROVIDER]
+
+
+def resolve_llm(provider: str | None = None, model_name: str | None = None) -> tuple[str, str]:
+    """(provider, model) thực tế; mặc định theo LLM_PROVIDER / LLM_MODEL."""
+    provider = (provider or LLM_PROVIDER).strip().lower()
+    if provider not in DEFAULT_MODELS:
+        raise ValueError(f"Provider không hợp lệ: {provider!r} (chọn 'gemini' hoặc 'ollama')")
+    if not model_name:
+        model_name = LLM_MODEL if provider == LLM_PROVIDER else DEFAULT_MODELS[provider]
+    return provider, model_name
+
+
+def make_llm(temperature: float = 0, max_tokens: int = 2048,
+             provider: str | None = None, model_name: str | None = None):
+    """Tạo chat model; mặc định theo LLM_PROVIDER / LLM_MODEL (evaluation có thể chọn provider khác cho giám khảo)."""
+    provider, model_name = resolve_llm(provider, model_name)
+    if provider == "gemini":
+        from langchain_google_genai import ChatGoogleGenerativeAI
+
+        api_key = _google_api_key()
+        if not api_key:
+            raise EnvironmentError("Thiếu GOOGLE_API_KEY — tạo key tại https://aistudio.google.com/apikey")
+        return ChatGoogleGenerativeAI(
+            model=model_name,
+            google_api_key=api_key,
+            temperature=temperature,
+            max_output_tokens=max_tokens,
+            max_retries=2,
+        )
+
+    from langchain_ollama import ChatOllama
+
+    return ChatOllama(
+        model=model_name,
+        base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
+        temperature=temperature,
+        num_predict=max_tokens,
+        num_ctx=12288,
+        reasoning=False,
+    )
+
+
+def is_transient_error(error: Exception) -> bool:
+    """Lỗi tạm thời của provider (quá tải / giới hạn request) — nên thử lại sau."""
+    message = f"{type(error).__name__}: {error}".lower()
+    return any(key in message for key in (
+        "429", "503", "rate_limit", "rate limit", "resource_exhausted", "unavailable", "overloaded", "high demand",
+    ))
+
+
+print(f"LLM: {LLM_PROVIDER} / {LLM_MODEL}")
+model = make_llm()
